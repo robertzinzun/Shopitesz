@@ -25,7 +25,7 @@ def consultarProductos():
 
 @app.route("/productos/agregar")
 def agregarProducto():
-    return "agregando un producto"
+    return "<b>agregando un producto</b><table><th>Prueba</th></table>"
 
 @app.route("/productos/actualizar")
 def actualizarProducto():
