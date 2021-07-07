@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>SHOPITESZ</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}"><!-- Aplicando estilo de un hoja externa -->
-    <style><!-- Aplicando estilo a nivel documento -->
-        input{
-            background:aqua;
-        }
-    </style>
-</head>
-<body>
+{% extends 'comunes/base.html' %}
+{% block contenido %}
     <H1>
        ACCESO A LA TIENDA VIRTUAL
     </H1>
@@ -29,6 +18,4 @@
         <a class="linkButton" href="/">Regresar</a>
         <input type="submit" value="Validar">
     </form>
-
-</body>
-</html>
+{% endblock %}

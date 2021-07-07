@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SHOPITESZ</title>
-</head>
-<body>
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
     <h1>LISTADO DE PRODUCTOS</h1>
-    <table border="1">
+    <div class="table-responsive">
+    <table class="table">
         <thead>
             <th>NOMBRE</th>
             <th>DESCRIPCION</th>
@@ -19,6 +19,12 @@
             <td>$18,000</td>
             <td>5 unidades</td>
         </tr>
+        <tr>
+            <td>Laptop HP</td>
+            <td>Procesador:i5, 256GB SHD,16 GB en RAM</td>
+            <td>$18,000</td>
+            <td>5 unidades</td>
+        </tr>
     </table>
-</body>
-</html>
+    </div>
+{% endblock %}
