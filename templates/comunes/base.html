@@ -14,7 +14,15 @@
 {% block content %}
 <div class="container">
     {% block contenido %}
-
+        <!--Sistema de alertas de Bootstrap -->
+       <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+           <strong>
+               {% for msg in get_flashed_messages() %}
+                    {{msg}}
+               {% endfor %}
+           </strong>
+        </div>
     {% endblock %}
 </div>
 {% endblock %}
