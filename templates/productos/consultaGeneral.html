@@ -10,21 +10,19 @@
         <thead>
             <th>NOMBRE</th>
             <th>DESCRIPCION</th>
+            <th>CATEGORIA</th>
             <th>PRECIO</th>
             <th>STOCK</th>
         </thead>
-        <tr>
-            <td>Laptop DELL</td>
-            <td>Procesador:i5, 256GB SHD,16 GB en RAM</td>
-            <td>$18,000</td>
-            <td>5 unidades</td>
-        </tr>
-        <tr>
-            <td>Laptop HP</td>
-            <td>Procesador:i5, 256GB SHD,16 GB en RAM</td>
-            <td>$18,000</td>
-            <td>5 unidades</td>
-        </tr>
+        {% for prod in productos %}
+            <tr>
+                <td>{{prod.nombre}}</td>
+                <td>{{prod.descripcion}}</td>
+                <td>{{prod.categoria.nombre}}</td>
+                <td>{{prod.precioVenta}}</td>
+                <td>{{prod.existencia}}</td>
+            </tr>
+        {% endfor %}
     </table>
     </div>
 {% endblock %}

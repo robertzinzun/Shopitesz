@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria
+from modelo.Dao import db,Categoria,Producto
+from flask_login import login_required,login_user,logout_user,current_user,login_manager
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz:Shopit3sz.123@localhost/shopitesz'
@@ -26,7 +27,8 @@ def login():
 @app.route("/productos")
 def consultarProductos():
     #return "Retorna la lista de productos"
-    return render_template("productos/consultaGeneral.html")
+    producto=Producto()
+    return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
 
 @app.route("/productos/agregar")
 def agregarProducto():
@@ -100,7 +102,18 @@ def editarCategoria():
         flash('¡ Error al editar la categoria !')
 
     return redirect(url_for('consultaCategorias'))
-    
+@app.route('/Categorias/eliminar/<int:id>')
+def eliminarCategoria(id):
+    try:
+        categoria=Categoria()
+        #categoria.eliminar(id)
+        categoria.eliminacionLogica(id)
+        flash('Categoria eliminada con exito')
+    except:
+        flash('Error al eliminar la categoria')
+    return redirect(url_for('consultaCategorias'))
+
+
 #Fin del crud de categorias
 if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD

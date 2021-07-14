@@ -47,3 +47,6 @@ th{
     background:black;
     color:red;
 }
+button{
+    border-radius:20px 20px;
+}

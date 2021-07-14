@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f42c8a51-42a3-494f-b8ed-111cfe047673" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/modelo/Dao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modelo/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/categorias/consultaGeneral.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comunes/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comunes/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comunes/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comunes/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modelo/Dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/modelo/Dao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/estilo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/editar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productos/consultaGeneral.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productos/consultaGeneral.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/comunes/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
+            <state relative-caret-position="456">
               <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#626#633#1" expanded="true" />
@@ -37,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/comunes/menu.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="336">
               <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
             </state>
           </provider>
@@ -46,28 +44,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/productos/consultaGeneral.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+            <state relative-caret-position="516">
+              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/css/estilo.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
+            <state relative-caret-position="72">
+              <caret line="3" column="88" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="88" />
               <folding>
-                <element signature="e#0#47#0" expanded="true" />
+                <element signature="e#0#70#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,21 +65,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/categorias/editar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="22" column="61" lean-forward="true" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="67" />
-              <folding>
-                <element signature="e#2175#2182#1" expanded="true" />
-                <element signature="e#2835#2842#1" expanded="true" />
-              </folding>
+            <state relative-caret-position="553">
+              <caret line="81" column="60" lean-forward="true" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="30" column="22" lean-forward="true" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state relative-caret-position="180">
+              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -102,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/templates/usuarios/login.html">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="33" lean-forward="true" selection-start-column="33" selection-end-column="33" />
+              <caret column="33" selection-start-column="33" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -110,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/categorias/consultaGeneral.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
+            <state relative-caret-position="624">
               <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
             </state>
           </provider>
@@ -119,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/categorias/agregar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="22" column="14" lean-forward="true" selection-end-line="22" selection-end-column="14" />
+            <state relative-caret-position="528">
+              <caret line="22" column="14" selection-end-line="22" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -146,22 +131,23 @@
         <option value="$PROJECT_DIR$/templates/registrarCuenta.html" />
         <option value="$PROJECT_DIR$/templates/usuarios/registrarCuenta.html" />
         <option value="$PROJECT_DIR$/templates/usuarios/login.html" />
-        <option value="$PROJECT_DIR$/templates/productos/consultaGeneral.html" />
         <option value="$PROJECT_DIR$/templates/principal.html" />
-        <option value="$PROJECT_DIR$/static/css/estilo.css" />
         <option value="$PROJECT_DIR$/templates/comunes/menu.html" />
         <option value="$PROJECT_DIR$/templates/categorias/agregar.html" />
         <option value="$PROJECT_DIR$/templates/comunes/base.html" />
         <option value="$PROJECT_DIR$/templates/categorias/consultaGeneral.html" />
-        <option value="$PROJECT_DIR$/modelo/Dao.py" />
         <option value="$PROJECT_DIR$/templates/categorias/editar.html" />
+        <option value="$PROJECT_DIR$/static/css/estilo.css" />
+        <option value="$PROJECT_DIR$/templates/productos/consultaGeneral.html" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/modelo/Dao.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="y" value="23" />
+    <option name="width" value="827" />
+    <option name="height" value="822" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -169,17 +155,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Shopitesz" type="b2602c69:ProjectViewProjectNode" />
               <item name="Shopitesz" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz" type="462c0819:PsiDirectoryNode" />
-              <item name="modelo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Shopitesz" type="b2602c69:ProjectViewProjectNode" />
@@ -207,13 +189,12 @@
               <item name="Shopitesz" type="b2602c69:ProjectViewProjectNode" />
               <item name="Shopitesz" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="categorias" type="462c0819:PsiDirectoryNode" />
+              <item name="productos" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -293,7 +274,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.5006196" side_tool="true" weight="0.24947146" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3283767" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3283767" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -361,61 +342,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/productos/consultaGeneral.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/usuarios/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="33" lean-forward="true" selection-start-column="33" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/estilo.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comunes/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/categorias/agregar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="22" column="14" lean-forward="true" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="30" column="22" lean-forward="true" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/categorias/consultaGeneral.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+        <state relative-caret-position="471">
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/comunes/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
+        <state relative-caret-position="456">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#626#633#1" expanded="true" />
@@ -423,23 +359,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comunes/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/usuarios/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="33" selection-start-column="33" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/categorias/consultaGeneral.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/categorias/agregar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="22" column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/categorias/editar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="22" column="61" lean-forward="true" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="67" />
-          <folding>
-            <element signature="e#2175#2182#1" expanded="true" />
-            <element signature="e#2835#2842#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="553">
+          <caret line="81" column="60" lean-forward="true" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/productos/consultaGeneral.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
+        <state relative-caret-position="72">
+          <caret line="3" column="88" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="88" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
