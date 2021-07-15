@@ -29,6 +29,13 @@
           <li><a href="#">VENDEDORES</a></li>
         </ul>
       </li>
+      <ul class="nav navbar-nav navbar-right">
+            {% if not current_user.is_authenticated %}
+            <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
+            {% else %}
+            <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
+            {% endif %}
+      </ul>
     </ul>
   </div>
 </nav>

@@ -1,28 +1,89 @@
-from flask import Flask,render_template,request,redirect,url_for,flash
+from datetime import timedelta
+
+from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto
-from flask_login import login_required,login_user,logout_user,current_user,login_manager
+from modelo.Dao import db,Categoria,Producto,Usuario
+from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz:Shopit3sz.123@localhost/shopitesz'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
+#Implementación de la gestion de usuarios con flask-login
+login_manager=LoginManager()
+login_manager.init_app(app)
+login_manager.login_view='mostrar_login'
+login_manager.refresh_view="mostrar_login"
+login_manager.needs_refresh_message=("Tu sesión ha expirado, por favor inicia nuevamente tu sesión")
+login_manager.needs_refresh_message_category="info"
+
+
+@app.before_request
+def before_request():
+    session.permanent=True
+    app.permanent_session_lifetime=timedelta(minutes=1)
+
 @app.route("/")
 def inicio():
     #return "Bienvenido a la tienda en linea Shopitesz"
     return render_template('principal.html')
-@app.route('/validarSesion')
-def validarSesion():
-    return render_template('usuarios/login.html')
 
-@app.route('/registrarCuenta')
-def registrarCuenta():
+@app.route('/Usuarios/iniciarSesion')
+def mostrar_login():
+    if current_user.is_authenticated:
+        return render_template('principal.html')
+    else:
+        return render_template('usuarios/login.html')
+
+@login_manager.user_loader
+def cargar_usuario(id):
+    return Usuario.query.get(int(id))
+
+@app.route('/Usuarios/nuevo')
+def nuevoUsuario():
+    if current_user.is_authenticated:
+        return render_template('principal.html')
+    else:
+        return render_template('usuarios/registrarCuenta.html')
+
+@app.route('/Usuarios/agregar',methods=['post'])
+def agregarUsuario():
+    try:
+        usuario=Usuario()
+        usuario.nombreCompleto=request.form['nombre']
+        usuario.telefono=request.form['telefono']
+        usuario.direccion=request.form['direccion']
+        usuario.email=request.form['email']
+        usuario.genero=request.form['genero']
+        usuario.password=request.form['password']
+        usuario.tipo=request.values.get("tipo","Comprador")
+        usuario.estatus='Activo'
+        usuario.agregar()
+        flash('¡ Usuario registrado con exito')
+    except:
+        flash('¡ Error al agregar al usuario !')
     return render_template('usuarios/registrarCuenta.html')
 
-@app.route("/login",methods=['POST'])
+
+@app.route("/Usuarios/validarSesion",methods=['POST'])
 def login():
     correo=request.form['correo']
-    return "Validando al usuario:"+correo
+    password=request.form['password']
+    usuario=Usuario()
+    user=usuario.validar(correo,password)
+    print('Credenciales:'+request.form['correo']+","+request.form['password'])
+    if user!=None:
+        login_user(user)
+        return render_template('principal.html')
+    else:
+        flash('Nombre de usuario o contraseña incorrectos')
+        return render_template('usuarios/login.html')
+
+@app.route('/Usuarios/cerrarSesion')
+@login_required
+def cerrarSesion():
+    logout_user()
+    return redirect(url_for('mostrar_login'))
 
 @app.route("/productos")
 def consultarProductos():
@@ -64,55 +125,78 @@ def consultarImagenCategoria(id):
     cat=Categoria()
     return cat.consultarImagen(id)
 
+
 @app.route('/Categorias/nueva')
+@login_required
 def nuevaCategoria():
-    return render_template('categorias/agregar.html')
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('categorias/agregar.html')
+    else:
+        return redirect(url_for('mostrar_login'))
 
 @app.route('/Categorias/agregar',methods=['post'])
+@login_required
 def agregarCategoria():
-    try:
-        cat=Categoria()
-        cat.nombre=request.form['nombre']
-        cat.imagen=request.files['imagen'].stream.read()
-        cat.estatus='Activa'
-        cat.agregar()
-        flash('¡ Categoria agregada con exito !')
-    except:
-        flash('¡ Error al agregar la categoria !')
-    return redirect(url_for('consultaCategorias'))
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            cat=Categoria()
+            cat.nombre=request.form['nombre']
+            cat.imagen=request.files['imagen'].stream.read()
+            cat.estatus='Activa'
+            cat.agregar()
+            flash('¡ Categoria agregada con exito !')
+        except:
+            flash('¡ Error al agregar la categoria !')
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
 
 @app.route('/Categorias/<int:id>')
+@login_required
 def consultarCategoria(id):
-    cat=Categoria()
-    return render_template('categorias/editar.html',cat=cat.consultaIndividuall(id))
+    if current_user.is_authenticated and current_user.is_admin():
+        cat=Categoria()
+        return render_template('categorias/editar.html',cat=cat.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
 
 @app.route('/Categorias/editar',methods=['POST'])
+@login_required
 def editarCategoria():
-    try:
-        cat=Categoria()
-        cat.idCategoria=request.form['id']
-        cat.nombre=request.form['nombre']
-        imagen=request.files['imagen'].stream.read()
-        if imagen:
-            cat.imagen=imagen
-        cat.estatus=request.values.get("estatus","Inactiva")
-        cat.editar()
-        flash('¡ Categoria editada con exito !')
-    except:
-        flash('¡ Error al editar la categoria !')
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            cat=Categoria()
+            cat.idCategoria=request.form['id']
+            cat.nombre=request.form['nombre']
+            imagen=request.files['imagen'].stream.read()
+            if imagen:
+                cat.imagen=imagen
+            cat.estatus=request.values.get("estatus","Inactiva")
+            cat.editar()
+            flash('¡ Categoria editada con exito !')
+        except:
+            flash('¡ Error al editar la categoria !')
 
-    return redirect(url_for('consultaCategorias'))
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
 @app.route('/Categorias/eliminar/<int:id>')
+@login_required
 def eliminarCategoria(id):
-    try:
-        categoria=Categoria()
-        #categoria.eliminar(id)
-        categoria.eliminacionLogica(id)
-        flash('Categoria eliminada con exito')
-    except:
-        flash('Error al eliminar la categoria')
-    return redirect(url_for('consultaCategorias'))
-
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            categoria=Categoria()
+            #categoria.eliminar(id)
+            categoria.eliminacionLogica(id)
+            flash('Categoria eliminada con exito')
+        except:
+            flash('Error al eliminar la categoria')
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 #Fin del crud de categorias
 if __name__=='__main__':
