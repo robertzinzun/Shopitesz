@@ -111,7 +111,6 @@ class Usuario(UserMixin,db.Model):
     #Definir el método para la autenticacion
     def validar(self,email,password):
         usuario=Usuario.query.filter(Usuario.email==email).first()
-        print(usuario.nombreCompleto+","+usuario.estatus)
         if usuario!=None and usuario.validarPassword(password) and usuario.is_active():
             return usuario
         else:

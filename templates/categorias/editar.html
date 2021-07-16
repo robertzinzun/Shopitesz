@@ -27,7 +27,7 @@
             <label>Imagen:</label>
             <input type="file" name="imagen" placeholder="Imagen de la Categoria" class="form-control">
             <a href="#" data-toggle="modal" data-target="#imagen">
-                <span class="glyphicon glyphicon-eye-open"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>Ver Imagen
             </a>
         </div>
             <button type="submit" class="btn btn-primary">
@@ -51,7 +51,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Imagen del producto <b>{{cat.nombre}}</b></h4>
+        <h4 class="modal-title">Imagen de la categoria: <b>{{cat.nombre}}</b></h4>
       </div>
       <div class="modal-body">
         <img src="/Categorias/consultarImagen/{{cat.idCategoria}}" width="200px" height="150px">

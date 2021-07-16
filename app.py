@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from flask import Flask,render_template,request,redirect,url_for,flash,session
+from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
 from modelo.Dao import db,Categoria,Producto,Usuario
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
@@ -13,15 +13,14 @@ app.secret_key='Cl4v3'
 login_manager=LoginManager()
 login_manager.init_app(app)
 login_manager.login_view='mostrar_login'
-login_manager.refresh_view="mostrar_login"
-login_manager.needs_refresh_message=("Tu sesión ha expirado, por favor inicia nuevamente tu sesión")
-login_manager.needs_refresh_message_category="info"
+login_manager.login_message='¡ Tu sesión expiró !'
+login_manager.login_message_category="info"
 
-
+# Urls defininas para el control de usuario
 @app.before_request
 def before_request():
     session.permanent=True
-    app.permanent_session_lifetime=timedelta(minutes=1)
+    app.permanent_session_lifetime=timedelta(minutes=10)
 
 @app.route("/")
 def inicio():
@@ -41,7 +40,7 @@ def cargar_usuario(id):
 
 @app.route('/Usuarios/nuevo')
 def nuevoUsuario():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and not current_user.is_admin():
         return render_template('principal.html')
     else:
         return render_template('usuarios/registrarCuenta.html')
@@ -71,7 +70,6 @@ def login():
     password=request.form['password']
     usuario=Usuario()
     user=usuario.validar(correo,password)
-    print('Credenciales:'+request.form['correo']+","+request.form['password'])
     if user!=None:
         login_user(user)
         return render_template('principal.html')
@@ -85,9 +83,14 @@ def cerrarSesion():
     logout_user()
     return redirect(url_for('mostrar_login'))
 
+@app.route('/Usuarios/verPerfil')
+@login_required
+def consultarUsuario():
+    return render_template('usuarios/editar.html')
+#fin del manejo de usuarios
+
 @app.route("/productos")
 def consultarProductos():
-    #return "Retorna la lista de productos"
     producto=Producto()
     return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
 
@@ -130,26 +133,33 @@ def consultarImagenCategoria(id):
 @login_required
 def nuevaCategoria():
     if current_user.is_authenticated and current_user.is_admin():
-        return render_template('categorias/agregar.html')
+            return render_template('categorias/agregar.html')
     else:
-        return redirect(url_for('mostrar_login'))
+        abort(404)
 
 @app.route('/Categorias/agregar',methods=['post'])
 @login_required
 def agregarCategoria():
-    if current_user.is_authenticated and current_user.is_admin():
-        try:
-            cat=Categoria()
-            cat.nombre=request.form['nombre']
-            cat.imagen=request.files['imagen'].stream.read()
-            cat.estatus='Activa'
-            cat.agregar()
-            flash('¡ Categoria agregada con exito !')
-        except:
-            flash('¡ Error al agregar la categoria !')
-        return redirect(url_for('consultaCategorias'))
-    else:
-        return redirect(url_for('mostrar_login'))
+    try:
+        if current_user.is_authenticated:
+            if current_user.is_admin():
+                try:
+                    cat=Categoria()
+                    cat.nombre=request.form['nombre']
+                    cat.imagen=request.files['imagen'].stream.read()
+                    cat.estatus='Activa'
+                    cat.agregar()
+                    flash('¡ Categoria agregada con exito !')
+                except:
+                    flash('¡ Error al agregar la categoria !')
+                return redirect(url_for('consultaCategorias'))
+            else:
+                abort(404)
+
+        else:
+            return redirect(url_for('mostrar_login'))
+    except:
+        abort(500)
 
 
 @app.route('/Categorias/<int:id>')
@@ -199,6 +209,21 @@ def eliminarCategoria(id):
         return redirect(url_for('mostrar_login'))
 
 #Fin del crud de categorias
+# manejo de pedidos
+@app.route('/Pedidos')
+@login_required
+def consultarPedidos():
+    return "Pedidos del usuario:"+current_user.nombreCompleto+", tipo:"+current_user.tipo
+
+# fin del manejo de pedidos
+#manejo de errores
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('comunes/error_404.html'),404
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('comunes/error_500.html'),500
 if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD
     app.run(debug=True)
