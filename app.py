@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario
+from modelo.Dao import db,Categoria,Producto,Usuario,Carrito
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -216,6 +216,17 @@ def consultarPedidos():
     return "Pedidos del usuario:"+current_user.nombreCompleto+", tipo:"+current_user.tipo
 
 # fin del manejo de pedidos
+# Seccion para el carrito
+@app.route('/carrito/agregar')
+def agregarProductoCarrito():
+    carrito=Carrito()
+    carrito.idProducto=1
+    carrito.idUsuario=2
+    carrito.idProducto=1
+    carrito.agregar()
+    return 'Producto agregado al carrito'
+
+# fin de la seccion del carrito
 #manejo de errores
 @app.errorhandler(404)
 def error_404(e):

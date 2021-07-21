@@ -1,8 +1,8 @@
 {% extends 'comunes/base.html' %}
 {% block contenido %}
     {{super()}}
-    <h1 class="bg-primary text-center">Registro de Usuarios</h1>
-    <form action="/Usuarios/agregar" method="post">
+    <h1 class="bg-primary text-center" onclick="alert('Se hizo click')" onclick="imprimirMsg()">Registro de Usuarios</h1>
+    <form action="/Usuarios/agregar" method="post" onsubmit="return validar(this)">
         <div class="form-group">
             <label for="nombre">Nombre completo:</label>
             <input class="form-control form-control-lg" type="text" name="nombre" maxlength="50"  placeholder="Nombre Completo" required>
@@ -17,7 +17,12 @@
         </div>
         <div class="form-group">
             <label for="clave">Password:</label>
-            <input type="password" name="password" maxlength="20" class="form-control" required>
+            <input type="password" name="password" id="password" maxlength="20" class="form-control" required>
+        </div>
+        <input type="checkbox" id="verPassword" onchange="verPasswords()">Ver password
+        <div class="form-group">
+            <label for="clave">Confirmar Password:</label>
+            <input type="password" name="passwordConfirmacion" id="passwordConfirmacion" maxlength="20" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="telefono">Telefono:</label>
@@ -45,4 +50,10 @@
             Regresar
         </a>
     </form>
+<div id="notificaciones">
+
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{url_for('static',filename='js/usuarios.js')}}"></script>
 {% endblock %}
