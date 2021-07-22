@@ -4,6 +4,8 @@ from flask import Flask,render_template,request,redirect,url_for,flash,session,a
 from flask_bootstrap import Bootstrap
 from modelo.Dao import db,Categoria,Producto,Usuario,Carrito
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
+import json
+
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz:Shopit3sz.123@localhost/shopitesz'
@@ -88,11 +90,32 @@ def cerrarSesion():
 def consultarUsuario():
     return render_template('usuarios/editar.html')
 #fin del manejo de usuarios
-
+#Manejo de las rutas de productos
 @app.route("/productos")
 def consultarProductos():
     producto=Producto()
     return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
+@app.route("/productos/consulta/categorias")
+def productosPorCategoria():
+    categoria=Categoria()
+    return render_template('productos/productosPorCategoria.html',categorias=categoria.consultaGeneral())
+@app.route("/productos/categoria/<int:id>")
+def consultarProductosPorCategoria(id):
+    producto=Producto()
+    if id==0:
+        lista=producto.consultaGeneral()
+    else:
+        lista=producto.consultarProductosPorCategoria(id)
+    #print(lista)
+    listaProductos=[]
+    #Generacion de un diccionario para convertir los datos a JSON
+    for prod in lista:
+        prod_dic={'idProducto':prod.idProducto,'nombre':prod.nombre,'precio':prod.precioVenta,'existencia':prod.existencia}
+        listaProductos.append(prod_dic)
+    #print(listaProductos)
+    var_json=json.dumps(listaProductos)
+    return var_json
+
 
 @app.route("/productos/agregar")
 def agregarProducto():
@@ -101,6 +124,7 @@ def agregarProducto():
 @app.route("/productos/actualizar")
 def actualizarProducto():
     return "actualizando un producto"
+#fin del manejo de las rutas de productos
 @app.route("/cesta")
 def consultarCesta():
     return "consultando la cesta de compra"

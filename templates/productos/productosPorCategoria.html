@@ -1,0 +1,32 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <h1 class="bg-primary text-center">LISTADO DE PRODUCTOS POR CATEGORIA</h1>
+    <label>Selecciona la Categoria:</label>
+    <select id="categoria" onchange="obtenerID()">
+        <option value="0">Todas las categorias</option>
+        {% for cat in categorias %}
+            {% if cat.estatus=='Activa' %}
+            <option value="{{cat.idCategoria}}">{{cat.nombre}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <div class="table-responsive">
+    <table class="table" id="datos">
+        <thead>
+            <th>NOMBRE</th>
+            <th>DESCRIPCION</th>
+            <th>CATEGORIA</th>
+            <th>PRECIO</th>
+            <th>STOCK</th>
+        </thead>
+    </table>
+    </div>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static',filename='js/productos.js')}}"></script>
+{% endblock %}
