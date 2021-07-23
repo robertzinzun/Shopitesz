@@ -110,12 +110,18 @@ def consultarProductosPorCategoria(id):
     listaProductos=[]
     #Generacion de un diccionario para convertir los datos a JSON
     for prod in lista:
-        prod_dic={'idProducto':prod.idProducto,'nombre':prod.nombre,'precio':prod.precioVenta,'existencia':prod.existencia}
+        prod_dic={'idProducto':prod.idProducto,'nombre':prod.nombre,'descripcion':prod.descripcion,'precio':prod.precioVenta,'existencia':prod.existencia}
         listaProductos.append(prod_dic)
     #print(listaProductos)
     var_json=json.dumps(listaProductos)
     return var_json
 
+@app.route('/producto/<int:id>')
+def consultarProducto(id):
+    prod=Producto();
+    prod=prod.consultaIndividual(id)
+    dict_producto={"idProducto":prod.idProducto,"nombre":prod.nombre,"decripcion":prod.descripcion,"precio":prod.precioVenta,"existencia":prod.existencia}
+    return json.dumps(dict_producto)
 
 @app.route("/productos/agregar")
 def agregarProducto():

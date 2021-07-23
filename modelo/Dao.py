@@ -60,6 +60,9 @@ class Producto(db.Model):
     def consultarProductosPorCategoria(self,idCategoria):
         return self.query.filter(Producto.idCategoria==idCategoria,Producto.estatus=='Activo').all()
 
+    def consultaIndividual(self,id):
+        return Producto.query.get(id);
+
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'
     idUsuario=Column(Integer,primary_key=True)
