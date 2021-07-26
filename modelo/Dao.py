@@ -63,6 +63,9 @@ class Producto(db.Model):
     def consultaIndividual(self,id):
         return Producto.query.get(id);
 
+    def consultarFoto(self,id):
+        return self.consultaIndividual(id).foto
+
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'
     idUsuario=Column(Integer,primary_key=True)
@@ -135,10 +138,14 @@ class Carrito(db.Model):
     fecha=Column(Date,default=datetime.date.today())
     cantidad=Column(Integer,nullable=False,default=1)
     estatus=Column(String,nullable=False,default='Pendiente')
+    producto=relationship('Producto',backref='carrito',lazy='select')
+    usuario=relationship('Usuario',backref='carrito',lazy='select')
 
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+    def consultaGeneral(self,idUsuario):
+        return self.query.filter(Carrito.idUsuario==idUsuario).all()
 
 
 

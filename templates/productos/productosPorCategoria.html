@@ -25,7 +25,6 @@
             <th>DESCRIPCION</th>
             <th>PRECIO</th>
             <th>STOCK</th>
-            <th></th>
             <th>COMPRAR</th>
         </thead>
     </table>
@@ -38,32 +37,52 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Carrito de compra</b></h4>
+          <h4 class="modal-title"><b><p class="text-center">Agregando productos a la Cesta</p></b></h4>
       </div>
-
           <div class="modal-body">
-            <div id="informacionProducto">
-
-                <label>ID:</label>
-                <input type="number" name="id" id="id" readonly>
-                <label>Nombre:</label>
-                <input type="text" name="nombre" id="nombre" readonly>
-                <label>Descripcion:</label>
-                <input type="text" name="descripcion" id="descripcion" readonly>
-                <label>Precio:</label>
-                <input type="number" name="precio" id="precio" readonly>
-                <label>Existencia:</label>
-                <input type="number" name="existencia" id="existencia" readonly>
-                <label>Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad"  min="1" step="1">
-                <label>Total:</label>
-                <input type="number" name="total" id="total" readonly>
-
-
+            <div class="row">
+                <div class="col-sm-4">
+                    <img class="img-rounded" height="100%" width="80%" id="imagen">
+                </div>
+                <div class="col-sm-4">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="number" name="id" id="id" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" id="nombre" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <textarea name="descripcion" id="descripcion" readonly class="form-control"></textarea>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Precio $:</label>
+                    <input type="number" name="precio" id="precio" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Existencia:</label>
+                    <input type="number" name="existencia" id="existencia" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Cantidad:</label>
+                    <input type="number" name="cantidad" id="cantidad" value="1" min="1" step="1" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Total $:</label>
+                    <input type="number" name="total" id="total" readonly class="form-control">
+                </div>
+                </div>
             </div>
+              <div id="notificaciones" class="text-center">
+
+              </div>
           </div>
           <div class="modal-footer">
-              <a href="/carrito/agregar" class="btn btn-default">Agregar</a>
+              <button class="btn btn-default" id="agregar" onclick="agregarCarrito()">Agregar</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           </div>
 

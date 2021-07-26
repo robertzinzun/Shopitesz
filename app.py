@@ -95,10 +95,12 @@ def consultarUsuario():
 def consultarProductos():
     producto=Producto()
     return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
-@app.route("/productos/consulta/categorias")
+
+@app.route("/productos/categorias")
 def productosPorCategoria():
     categoria=Categoria()
     return render_template('productos/productosPorCategoria.html',categorias=categoria.consultaGeneral())
+
 @app.route("/productos/categoria/<int:id>")
 def consultarProductosPorCategoria(id):
     producto=Producto()
@@ -117,12 +119,21 @@ def consultarProductosPorCategoria(id):
     return var_json
 
 @app.route('/producto/<int:id>')
-def consultarProducto(id):
-    prod=Producto();
-    prod=prod.consultaIndividual(id)
-    dict_producto={"idProducto":prod.idProducto,"nombre":prod.nombre,"decripcion":prod.descripcion,"precio":prod.precioVenta,"existencia":prod.existencia}
-    return json.dumps(dict_producto)
 
+def consultarProducto(id):
+    if current_user.is_authenticated and  current_user.is_comprador():
+        prod=Producto()
+        prod=prod.consultaIndividual(id)
+        dict_producto={"idProducto":prod.idProducto,"nombre":prod.nombre,"descripcion":prod.descripcion,"precio":prod.precioVenta,"existencia":prod.existencia}
+        return json.dumps(dict_producto)
+    else:
+        msg={"estatus":"error","mensaje":"Debes iniciar sesion"}
+        return json.dumps(msg)
+
+@app.route('/productos/foto/<int:id>')
+def consultarFotoPorducto(id):
+    prod=Producto()
+    return prod.consultarFoto(id)
 @app.route("/productos/agregar")
 def agregarProducto():
     return "<b>agregando un producto</b><table><th>Prueba</th></table>"
@@ -131,9 +142,6 @@ def agregarProducto():
 def actualizarProducto():
     return "actualizando un producto"
 #fin del manejo de las rutas de productos
-@app.route("/cesta")
-def consultarCesta():
-    return "consultando la cesta de compra"
 
 @app.route("/productos/categoria/<int:id>")
 def consultarProductosCategoria(id):
@@ -247,15 +255,29 @@ def consultarPedidos():
 
 # fin del manejo de pedidos
 # Seccion para el carrito
-@app.route('/carrito/agregar')
-def agregarProductoCarrito():
-    carrito=Carrito()
-    carrito.idProducto=1
-    carrito.idUsuario=2
-    carrito.idProducto=1
-    carrito.agregar()
-    return 'Producto agregado al carrito'
+@app.route('/carrito/agregar/<data>',methods=['get'])
+def agregarProductoCarrito(data):
+    msg=''
+    if current_user.is_authenticated and current_user.is_comprador():
+        datos=json.loads(data)
+        carrito=Carrito()
+        carrito.idProducto=datos['idProducto']
+        carrito.idUsuario=current_user.idUsuario
+        carrito.cantidad=datos['cantidad']
+        carrito.agregar()
+        msg={'estatus':'ok','mensaje':'Producto agregado a la cesta.'}
+    else:
+        msg = {"estatus": "error", "mensaje": "Debes iniciar sesion"}
+    return json.dumps(msg)
 
+@app.route("/carrito")
+@login_required
+def consultarCesta():
+    if current_user.is_authenticated:
+        carrito=Carrito()
+        return render_template('carrito/consultaGeneral.html',cesta=carrito.consultaGeneral(current_user.idUsuario))
+    else:
+        return redirect(url_for('mostrar_login'))
 # fin de la seccion del carrito
 #manejo de errores
 @app.errorhandler(404)
